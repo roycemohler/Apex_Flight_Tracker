@@ -188,69 +188,35 @@ a{color:var(--accent);text-decoration:none}
     <span>&#128225; LiveATC &mdash; Air Traffic Control Audio</span>
     <span class="atclb" id="atcB">OFFLINE</span>
   </div>
-  <div class="atcn" id="atcN" style="display:none">&#9888; Auto-selected: highest delay airport. Change below.</div>
+  <div class="atcn" id="atcN" style="display:none">&#9888; Auto-selected: highest delay airport.</div>
   <div class="atcaw">
     <span class="atcal">&#9992; AIRPORT</span>
     <select id="atcS" class="atcs"></select>
-    <button class="atcb" id="btnTune">TUNE IN</button>
-    <button class="atcb" id="btnStop" style="border-color:var(--accent2);color:var(--accent2);background:rgba(255,94,32,.1)">STOP</button>
+    <span class="atcal" style="margin-left:4px">FEED</span>
+    <select id="atcFeed" class="atcs" style="max-width:160px"></select>
+    <button class="atcb" id="btnTune">&#9654; PLAY</button>
+    <button class="atcb" id="btnStop" style="border-color:var(--accent2);color:var(--accent2);background:rgba(255,94,32,.1)">&#9632; STOP</button>
   </div>
-  <div class="atcpw" id="atcW">
-    <iframe id="atcF" allowfullscreen allow="autoplay"></iframe>
+  <div id="atcW" style="display:none;margin-top:8px">
+    <div style="background:#000;border:1px solid var(--border2);border-radius:3px;padding:10px 12px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <div id="atcViz" style="display:flex;align-items:flex-end;gap:2px;height:20px"></div>
+        <div>
+          <div id="atcNowPlaying" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--green)">-- TUNED --</div>
+          <div id="atcStreamUrl" style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted2)"></div>
+        </div>
+        <div id="atcVol" style="margin-left:auto;display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted2)">
+          VOL <input type="range" id="volSlider" min="0" max="1" step="0.05" value="0.8" style="width:70px;accent-color:var(--accent)">
+        </div>
+      </div>
+      <audio id="atcAudio" style="width:100%" controls preload="none"></audio>
+    </div>
   </div>
   <div class="atch">
-    Audio via <a href="https://www.liveatc.net" target="_blank">LiveATC.net</a> &middot;
-    Auto-selects highest-delay airport &middot;
+    Direct stream via <a href="https://www.liveatc.net" target="_blank">LiveATC.net</a> &middot;
+    HTML5 audio player &middot; Auto-selects highest-delay airport &middot;
     <a href="https://www.liveatc.net/search/" target="_blank">Browse all feeds &rarr;</a>
   </div>
-</div>
-
-</div>
-<div class="sb">
-
-<div class="w">
-  <div class="wt">Current TFRs <span class="wlv">LIVE</span></div>
-  <div class="tfrl" id="tfrL">
-    <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted2);padding:8px 0"><span class="sp"></span>Loading TFR data&hellip;</div>
-  </div>
-  <button class="tfrb" id="tfrBtn">&#8634; Refresh TFRs</button>
-</div>
-
-<div class="w">
-  <div class="wt">Weather &middot; Georgetown TX</div>
-  <div style="display:flex;align-items:flex-end;gap:8px;margin-bottom:6px">
-    <div class="wxt">59&deg;</div>
-    <div><div style="font-size:14px;color:var(--text);font-weight:600">Sunny</div><div class="wxin">Georgetown, TX</div></div>
-  </div>
-  <div>
-    <div class="fcr"><span class="fcd">Thu</span><span class="fcc">Sunny</span><span class="fch">63&deg;</span><span class="fcp">0%</span></div>
-    <div class="fcr"><span class="fcd">Fri</span><span class="fcc">Clear</span><span class="fch">77&deg;</span><span class="fcp">0%</span></div>
-    <div class="fcr"><span class="fcd">Sat</span><span class="fcc">Clear</span><span class="fch">81&deg;</span><span class="fcp">5%</span></div>
-    <div class="fcr"><span class="fcd">Sun</span><span class="fcc">Sunny</span><span class="fch">92&deg;</span><span class="fcp">10%</span></div>
-    <div class="fcr"><span class="fcd">Mon</span><span class="fcc">Cloudy</span><span class="fch">54&deg;</span><span class="fcp">10%</span></div>
-  </div>
-</div>
-
-<div class="w">
-  <div class="wt">Zone Clocks</div>
-  <div class="tz">
-    <div class="tzc"><div class="tzt" id="tz0">--:--</div><div class="tzn">CENTRAL</div></div>
-    <div class="tzc"><div class="tzt" id="tz1">--:--</div><div class="tzn">EASTERN</div></div>
-    <div class="tzc"><div class="tzt" id="tz2">--:--</div><div class="tzn">PACIFIC</div></div>
-    <div class="tzc"><div class="tzt" id="tz3">--:--</div><div class="tzn">MOUNTAIN</div></div>
-    <div class="tzc"><div class="tzt" id="tz4">--:--</div><div class="tzn">ALASKA</div></div>
-    <div class="tzc"><div class="tzt" id="tz5">--:--</div><div class="tzn">HAWAII</div></div>
-  </div>
-</div>
-
-<div class="w">
-  <div class="wt">Aviation Resources</div>
-  <a href="https://nasstatus.faa.gov/" target="_blank"><button class="lnk">&#9992; FAA NAS Status</button></a>
-  <a href="https://tfr.faa.gov/tfr2/list.html" target="_blank"><button class="lnk">&#9940; FAA TFR List</button></a>
-  <a href="https://www.liveatc.net/search/" target="_blank"><button class="lnk">&#128225; LiveATC Feeds</button></a>
-  <a href="https://flightaware.com/miserymap/" target="_blank"><button class="lnk">&#128506; FlightAware Misery Map</button></a>
-  <a href="https://aviationweather.gov/gfa" target="_blank"><button class="lnk">&#127777; Aviation Weather</button></a>
-  <a href="https://www.fly.faa.gov/flyfaa/usmap.jsp" target="_blank"><button class="lnk">&#128200; FAA Air Traffic Map</button></a>
 </div>
 
 </div>
@@ -477,6 +443,10 @@ function renderBoard() {
 }
 
 // BUILD ATC SELECT
+// ATC STREAMS DATA
+var ATC_STREAMS = {"ATL": [["Atlanta App/Dep", "katl_app"], ["Atlanta Tower", "katl_twr"]], "ORD": [["Chicago App", "kord_app"], ["Chicago Tower", "kord_twr"]], "LAX": [["LA Approach", "klax_app"], ["LA Tower", "klax_twr"]], "DFW": [["DFW Approach", "kdfw_app"], ["DFW Tower", "kdfw_twr"]], "DEN": [["Denver App", "kden_app"], ["Denver Tower", "kden_twr"]], "JFK": [["JFK App/Final", "kjfk_app_final"], ["JFK Gnd/Twr", "kjfk_gnd_twr"]], "SFO": [["SFO Approach", "ksfo_app"], ["SFO Tower", "ksfo_twr"]], "SEA": [["Seattle App", "ksea_app"], ["Seattle Tower", "ksea_twr"]], "LAS": [["Vegas App", "klas_app"], ["Vegas Tower", "klas_twr"]], "MCO": [["Orlando App", "kmco_app"], ["Orlando Tower", "kmco_twr"]], "EWR": [["Newark App", "kewr_app"], ["Newark Tower", "kewr_twr"]], "MIA": [["Miami App", "kmia_app"], ["Miami Tower", "kmia_twr"]], "CLT": [["Charlotte App", "kclt_app"], ["Charlotte Tower", "kclt_twr"]], "PHX": [["Phoenix App", "kphx_app"], ["Phoenix Tower", "kphx_twr"]], "IAH": [["Houston App", "kiah_app"], ["Houston Tower", "kiah_twr"]], "BOS": [["Boston App", "kbos_app"], ["Boston Tower", "kbos_twr"]], "MSP": [["Minneapolis App", "kmsp_app"], ["Minneapolis Twr", "kmsp_twr"]], "DTW": [["Detroit App", "kdtw_app"], ["Detroit Tower", "kdtw_twr"]], "FLL": [["FLL Approach", "kfll_app"], ["FLL Tower", "kfll_twr"]], "BWI": [["BWI Approach", "kbwi_app"], ["BWI Tower", "kbwi_twr"]], "IAD": [["Dulles App", "kiad_app"], ["Dulles Tower", "kiad_twr"]], "DCA": [["Reagan App", "kdca_app"], ["Reagan Tower", "kdca_twr"]], "MDW": [["Midway App", "kmdw_app"], ["Midway Tower", "kmdw_twr"]], "LGA": [["LaGuardia App", "klga_app"], ["LaGuardia Twr", "klga_twr"]], "SLC": [["SLC Approach", "kslc_app"], ["SLC Tower", "kslc_twr"]], "SAN": [["San Diego App", "ksan_app"], ["San Diego Tower", "ksan_twr"]], "HNL": [["Honolulu App", "phnl_app"], ["Honolulu Tower", "phnl_twr"]], "AUS": [["Austin App", "kaus_app"], ["Austin Tower", "kaus_twr"]]};
+
+// BUILD AIRPORT SELECT
 AP.forEach(function(a) {
   var opt = document.createElement('option');
   opt.value = a.code;
@@ -484,102 +454,113 @@ AP.forEach(function(a) {
   document.getElementById('atcS').appendChild(opt);
 });
 
+// UPDATE FEED SELECT when airport changes
+function updateFeedSelect(code) {
+  var fs = document.getElementById('atcFeed');
+  fs.innerHTML = '';
+  var feeds = ATC_STREAMS[code] || [[code + ' App/Dep', code.toLowerCase() + '_app']];
+  feeds.forEach(function(f) {
+    var opt = document.createElement('option');
+    opt.value = f[1];
+    opt.textContent = f[0];
+    fs.appendChild(opt);
+  });
+}
+
 document.getElementById('atcS').onchange = function() {
   manualATC = true;
-  document.getElementById('atcN').style.display='none';
+  document.getElementById('atcN').style.display = 'none';
+  updateFeedSelect(this.value);
 };
+
+// Init feed select for first airport
+updateFeedSelect(AP[0].code);
+
+// VU METER animation
+var vuBars = [];
+var vuInterval = null;
+function buildVU() {
+  var viz = document.getElementById('atcViz');
+  viz.innerHTML = '';
+  vuBars = [];
+  for (var i = 0; i < 8; i++) {
+    var b = document.createElement('div');
+    b.style.cssText = 'width:3px;background:var(--green);border-radius:1px;height:4px;transition:height .1s';
+    viz.appendChild(b);
+    vuBars.push(b);
+  }
+}
+function startVU() {
+  if (vuInterval) clearInterval(vuInterval);
+  vuInterval = setInterval(function() {
+    vuBars.forEach(function(b) {
+      b.style.height = (Math.random() * 16 + 2) + 'px';
+    });
+  }, 120);
+}
+function stopVU() {
+  if (vuInterval) clearInterval(vuInterval);
+  vuBars.forEach(function(b) { b.style.height = '2px'; });
+}
+buildVU();
 
 function selectATC(code) {
   document.getElementById('atcS').value = code;
+  updateFeedSelect(code);
   manualATC = true;
   loadATC();
 }
+
 function loadATC() {
   var code = document.getElementById('atcS').value;
-  if (!code) return;
+  var mount = document.getElementById('atcFeed').value;
+  if (!code || !mount) return;
   curATC = code;
-  document.getElementById('atcF').src = 'https://www.liveatc.net/play/'+code.toLowerCase();
-  document.getElementById('atcW').classList.add('vis');
-  document.getElementById('atcB').textContent = 'LIVE - '+code;
+
+  var streamUrl = 'https://d.liveatc.net/' + mount;
+  var audio = document.getElementById('atcAudio');
+  audio.src = streamUrl;
+  audio.volume = parseFloat(document.getElementById('volSlider').value);
+  audio.play().catch(function() {});
+
+  document.getElementById('atcW').style.display = 'block';
+  document.getElementById('atcB').textContent = 'LIVE - ' + code;
+  document.getElementById('atcNowPlaying').textContent = code + ' - ' + (document.getElementById('atcFeed').options[document.getElementById('atcFeed').selectedIndex]||{text:''}).text;
+  document.getElementById('atcStreamUrl').textContent = streamUrl;
+
+  audio.onplaying = function() { startVU(); };
+  audio.onpause = function() { stopVU(); };
+  audio.onerror = function() {
+    stopVU();
+    document.getElementById('atcB').textContent = 'ERROR';
+    document.getElementById('atcNowPlaying').textContent = 'Stream unavailable - try another feed';
+    document.getElementById('atcNowPlaying').style.color = 'var(--red)';
+  };
   renderBoard();
 }
+
 function stopATC() {
-  document.getElementById('atcF').src = '';
-  document.getElementById('atcW').classList.remove('vis');
+  var audio = document.getElementById('atcAudio');
+  audio.pause();
+  audio.src = '';
+  document.getElementById('atcW').style.display = 'none';
   document.getElementById('atcB').textContent = 'OFFLINE';
+  stopVU();
   curATC = null;
   renderBoard();
 }
+
+document.getElementById('volSlider').oninput = function() {
+  var audio = document.getElementById('atcAudio');
+  if (audio) audio.volume = parseFloat(this.value);
+};
+
 document.getElementById('btnTune').onclick = loadATC;
 document.getElementById('btnStop').onclick = stopATC;
 
-// TFR
-function mockTFRs() {
-  var n = new Date();
-  function fmt(d) { return d.toISOString().slice(0,16).replace('T',' ')+'Z'; }
-  return [
-    {notam:'7/2387',loc:'Washington D.C. ADIZ',type:'Security',alts:'Surface - Unlimited',eff:fmt(new Date(n-3600000))},
-    {notam:'7/2341',loc:'Crawford TX - VIP Movement',type:'VIP',alts:'Surface - FL180',eff:fmt(new Date(n-7200000))},
-    {notam:'7/2298',loc:'Cape Canaveral FL',type:'Space Ops',alts:'Surface - FL600',eff:fmt(new Date(n-14400000))},
-    {notam:'7/2276',loc:'Los Angeles CA - Stadium',type:'Stadium',alts:'Surface - 3000 AGL',eff:fmt(new Date(n-18000000))},
-    {notam:'7/2255',loc:'Maui HI - Wildfire Ops',type:'Wildfire',alts:'Surface - 3000 MSL',eff:fmt(new Date(n-28800000))},
-    {notam:'7/2231',loc:'Fort Bragg NC - Military',type:'Military',alts:'Surface - FL230',eff:fmt(new Date(n-36000000))},
-    {notam:'7/2204',loc:'Dallas TX - VIP Movement',type:'VIP',alts:'Surface - FL180',eff:fmt(new Date(n-43200000))},
-    {notam:'7/2188',loc:'New York TRACON',type:'Temporary',alts:'Surface - FL180',eff:fmt(new Date(n-50400000))}
-  ];
-}
-async function loadTFRs() {
-  var w = document.getElementById('tfrL');
-  w.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--muted2);padding:8px"><span class="sp"></span>Fetching...</div>';
-  var tfrs = [];
-  try {
-    var url = 'https://api.allorigins.win/raw?url='+encodeURIComponent('https://tfr.faa.gov/tfr2/list.html');
-    var r = await fetch(url,{signal:AbortSignal.timeout(8000)});
-    if (r.ok) {
-      var txt = await r.text();
-      var doc = new DOMParser().parseFromString(txt,'text/html');
-      doc.querySelectorAll('table tr').forEach(function(row) {
-        var cells = row.querySelectorAll('td');
-        if (cells.length>=4) {
-          var notam=(cells[0]?cells[0].textContent.trim():'');
-          if (notam && /[0-9]/.test(notam)) {
-            tfrs.push({notam:notam,loc:(cells[1]?cells[1].textContent.trim():''),type:(cells[3]?cells[3].textContent.trim():'TFR'),alts:'',eff:(cells[4]?cells[4].textContent.trim():'')});
-          }
-        }
-      });
-    }
-  } catch(e){}
-  if (!tfrs.length) tfrs = mockTFRs();
-  renderTFRs(tfrs);
-}
-function renderTFRs(tfrs) {
-  var w = document.getElementById('tfrL');
-  if (!tfrs.length) { w.textContent='No active TFRs.'; return; }
-  var tcol = {Security:'var(--amber)',VIP:'var(--red)',Wildfire:'var(--orange)',Military:'var(--red)',Stadium:'var(--amber)'};
-  var tcls = {Security:'sec',VIP:'vip',Wildfire:'vip',Military:'vip'};
-  var frag = document.createDocumentFragment();
-  tfrs.slice(0,20).forEach(function(t) {
-    var col = tcol[t.type]||'var(--accent)';
-    var div = document.createElement('div');
-    div.className = 'tfri '+(tcls[t.type]||'');
-    div.onclick = function(){window.open('https://tfr.faa.gov/tfr2/list.html','_blank');};
-
-    var tyspan = document.createElement('span');
-    tyspan.className = 'tfrty';
-    tyspan.textContent = t.type||'TFR';
-    tyspan.style.cssText = 'background:'+col+'22;color:'+col+';border:1px solid '+col+'44';
-
-    var no = document.createElement('div'); no.className='tfrno'; no.textContent=t.notam;
-    var lo = document.createElement('div'); lo.className='tfrlc'; lo.textContent=t.loc||'--';
-    div.appendChild(tyspan); div.appendChild(no); div.appendChild(lo);
-    if (t.alts) { var al=document.createElement('div');al.className='tfral';al.textContent=t.alts;div.appendChild(al); }
-    if (t.eff)  { var ef=document.createElement('div');ef.className='tfrdt';ef.textContent='EFF: '+t.eff;div.appendChild(ef); }
-    frag.appendChild(div);
-  });
-  w.innerHTML='';
-  w.appendChild(frag);
-}
 document.getElementById('tfrBtn').onclick = loadTFRs;
+
+
 
 // INIT
 loadDelays();
